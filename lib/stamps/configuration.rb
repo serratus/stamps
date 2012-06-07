@@ -20,8 +20,7 @@ module Stamps
 	DEFAULT_ENDPOINT = 'https://swsim.testing.stamps.com/swsim/SwsimV22.asmx'.freeze # Test endpoint
 
     # The default namespace used on Stamps.com wsdl
-    # DEFAULT_NAMESPACE = 'http://stamps.com/xml/namespace/2010/11/swsim/swsimv12'
-	DEFAULT_NAMESPACE = 'http://testing.stamps.com/xml/namespace/2010/11/swsim/swsimv12' # Test namespace
+    DEFAULT_NAMESPACE = 'http://stamps.com/xml/namespace/2010/11/swsim/swsimv12'
 
     # @note JSON is preferred over XML because it is more concise and faster to parse.
     DEFAULT_FORMAT = :hash
