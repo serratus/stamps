@@ -16,10 +16,12 @@ module Stamps
       :endpoint].freeze
 
     # The endpoint that will be used to connect if none is set
-    DEFAULT_ENDPOINT = 'https://swsim.stamps.com/swsim/swsimv12.asmx'.freeze
+    #DEFAULT_ENDPOINT = 'https://swsim.stamps.com/swsim/swsimv12.asmx'.freeze
+	DEFAULT_ENDPOINT = 'https://swsim.testing.stamps.com/swsim/SwsimV22.asmx'.freeze # Test endpoint
 
     # The default namespace used on Stamps.com wsdl
-    DEFAULT_NAMESPACE = 'http://stamps.com/xml/namespace/2010/11/swsim/swsimv12'
+    # DEFAULT_NAMESPACE = 'http://stamps.com/xml/namespace/2010/11/swsim/swsimv12'
+	DEFAULT_NAMESPACE = 'http://testing.stamps.com/xml/namespace/2010/11/swsim/swsimv12' # Test namespace
 
     # @note JSON is preferred over XML because it is more concise and faster to parse.
     DEFAULT_FORMAT = :hash
