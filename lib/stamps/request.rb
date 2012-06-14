@@ -22,7 +22,10 @@ module Stamps
         soap.namespaces["xmlns:tns"] = self.namespace
         soap.body = params.to_hash
       end
-      Stamps::Response.new(response).to_hash
+      response = Stamps::Response.new(response).to_hash
+	  response_hash = response.values.detect {|v|  v.has_key?(:authenticator) if v.is_a?(Hash) }
+	  @authenticator = response_hash[:authenticator] if response_hash
+	  response
     end
 
     # Get the Authenticator token. By using an Authenticator, the integration
