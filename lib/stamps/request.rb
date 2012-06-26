@@ -35,6 +35,11 @@ module Stamps
     def authenticator_token
       @authenticator ||= self.get_authenticator_token
     end
+	
+	# manually set the authenticator token
+	def authenticator_token=(value)
+	  @authenticator = value
+	end
 
     # Make Authentication request for the user
     #
