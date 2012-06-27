@@ -37,25 +37,27 @@ module Stamps
     #
     def raise_errors
       message =  'FIXME:  Need to parse http for response message'
-      return  self.format_soap_faults if savon.soap_fault.present?
+	  if savon.soap_fault.present?
+		self.format_soap_faults
+	  end
 
       case http.code.to_i
       when 200
         return
       when 400
-        raise BadRequest, "(#{http.code}): #{message}"
+        raise BadRequest, "(#{http.code}): #{message}", self.errors
       when 401
-        raise Unauthorized, "(#{http.code}): #{message}"
+        raise Unauthorized, "(#{http.code}): #{message}", self.errors
       when 403
-        raise Forbidden, "(#{http.code}): #{message}"
+        raise Forbidden, "(#{http.code}): #{message}", self.errors
       when 404
-        raise NotFound, "(#{http.code}): #{message}"
+        raise NotFound, "(#{http.code}): #{message}", self.errors
       when 406
-        raise NotAcceptable, "(#{http.code}): #{message}"
+        raise NotAcceptable, "(#{http.code}): #{message}", self.errors
       when 500
-        raise InternalServerError, "Stamps.com had an internal error. (#{http.code}): #{message}"
+        raise InternalServerError, "Stamps.com had an internal error. (#{http.code}): #{message}", self.errors
       when 502..503
-        raise ServiceUnavailable, "(#{http.code}): #{message}"
+        raise ServiceUnavailable, "(#{http.code}): #{message}", self.errors
       end
     end
 
