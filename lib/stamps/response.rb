@@ -36,28 +36,28 @@ module Stamps
     # so that clients can process the error messages as they wish
     #
     def raise_errors
-      message =  'FIXME:  Need to parse http for response message'
-	  if savon.soap_fault.present?
-		self.format_soap_faults
-	  end
+      message =  'Error'
+      if savon.soap_fault.present?
+        self.format_soap_faults
+      end
 
       case http.code.to_i
       when 200
         return
       when 400
-        raise BadRequest, "(#{http.code}): #{message}", self.errors
+        raise BadRequest.new({errors: self.errors, http_code: http.code}), "(#{http.code}): BadRequest"
       when 401
-        raise Unauthorized, "(#{http.code}): #{message}", self.errors
+        raise Unauthorized.new({errors: self.errors, http_code: http.code}), "(#{http.code}): Unauthorized"
       when 403
-        raise Forbidden, "(#{http.code}): #{message}", self.errors
+        raise Forbidden.new({errors: self.errors, http_code: http.code}), "(#{http.code}): Forbidden"
       when 404
-        raise NotFound, "(#{http.code}): #{message}", self.errors
+        raise NotFound.new({errors: self.errors, http_code: http.code}), "(#{http.code}): NotFound"
       when 406
-        raise NotAcceptable, "(#{http.code}): #{message}", self.errors
+        raise NotAcceptable.new({errors: self.errors, http_code: http.code}), "(#{http.code}): NotAcceptable"
       when 500
-        raise InternalServerError, "Stamps.com had an internal error. (#{http.code}): #{message}", self.errors
+        raise InternalServerError.new({errors: self.errors, http_code: http.code}), "(#{http.code}): InternalServerError"
       when 502..503
-        raise ServiceUnavailable, "(#{http.code}): #{message}", self.errors
+        raise ServiceUnavailable.new({errors: self.errors, http_code: http.code}), "(#{http.code}): ServiceUnavailable"
       end
     end
 
