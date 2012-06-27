@@ -2,11 +2,10 @@ module Stamps
 
   # Custom error class for rescuing from all Stamps.com errors
   class Error < StandardError
-    attr_reader :data, :errors
+    attr_reader :data
 
-    def initialize(data, errors)
+    def initialize(data)
       @data = data
-	  @errors = errors
       super
     end
   end
